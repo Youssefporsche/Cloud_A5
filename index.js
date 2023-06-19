@@ -24,30 +24,20 @@ const port = 8000;
     })
 app.post('/uploadfile',(req,res)=>{
     s3.getObject({
-        Bucket:"scc-assignment4",
+        Bucket:process.env.S3_bucket_name,
         Key:"intents.json"
     },function(err,data){
-        if(err){
             s3.putObject({
                 Body:fs.createReadStream('./MOCK_DATA.json'),
-                Bucket:"scc-assignment4",
-                Key:"intents.json"
-            }).promise(res.send("file uploaded"));
-        }
-        else{
-            s3.putObject({
-                Body:fs.createReadStream('./MOCK_DATA.json'),
-                Bucket:"scc-assignment4",
+                Bucket:process.env.S3_bucket_name,
                 Key:"MOCK_DATA.json"
             }).promise(res.send("MOCK DATA uploaded"));
-        }
+        })
     })
-    
-})
 app.post('/deletefile',(req,res)=>{
     s3.deleteObject({
-        Bucket:"scc-assignment4",
-        Key:"intents.json"
+        Bucket:process.env.S3_bucket_name,
+        Key:"MOCK_DATA.json"
     }).promise(res.send("file deleted"))
 })
 app.listen(port, () => {  console.log('We are live on ' + port);});
