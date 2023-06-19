@@ -5,14 +5,7 @@ const express= require('express');
 const app=express();
 const port = 8000;
 
-//const file = fs.createWriteStream('secondfile.txt')
-// s3.putObject({
-//     Body:"Hello scc assignment 4",
-//     Bucket:"scc-assignment4",
-//     Key:"new file.txt"
-// }).promise();
-
-    app.get('/',(req,res)=>{
+app.get('/',(req,res)=>{
         fs.readFile('index.html',(err, data) => {
             if (err) {
               res.writeHead(500);
